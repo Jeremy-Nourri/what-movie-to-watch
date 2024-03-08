@@ -1,11 +1,35 @@
-import HomePage from "./components/HomePage";
+import { Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { BiCameraMovie } from "react-icons/bi";
+import NavBar from "./components/NavBar";
 
 function App() {
+
+    const favoritesFilms = useSelector(state => state.favorites.favorites);
+
     return (
         <>
-            <header></header>
-            <main className="container p-6">
-                <HomePage />
+            <header className="container relative ">
+                <div className="fixed top-0 left-0 right-0 z-10 flex items-center justify-between w-full p-3 lg:p-6 bg-primary text-white">
+                    <h1 className="hidden sm:block">What movie to watch !?</h1>
+                    <h1 className="sm:hidden">W M T W !?</h1>
+                    <NavBar />
+
+                    <div className="flex-none">
+                        <Link to="/favoris" >
+                            <div tabIndex={0} role="button" className="btn btn-neutral btn-circle">
+                                <div className="indicator">
+                                    <BiCameraMovie className="size-6" />
+                                    <span className="badge badge-sm indicator-item bg-secondary">{favoritesFilms.length}</span>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
+            </header>
+            <main className="container mt-16 lg:mt-24 p-6">
+                <Outlet />
             </main>
             <footer></footer>
         </>
