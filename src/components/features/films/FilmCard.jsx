@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+
 import { addFavorite, removeFavorite } from "../favorites/favoritesSlice";
 
 const FilmCard = ({ film }) => {
-    const location = useLocation();
 
+    const location = useLocation();
     const dispatch = useDispatch();
 
     return (
@@ -33,7 +34,7 @@ const FilmCard = ({ film }) => {
                 <div className="card-actions justify-center">
                     {location.pathname === "/favoris" ? (
                         <button className="btn btn-sm btn-secondary" onClick={() => dispatch(removeFavorite(film.id))}>
-                            Retirer
+                            {film.id}
                         </button>
                     ) : (
                         <button className="btn btn-sm btn-secondary" onClick={() => dispatch(addFavorite(film))}>

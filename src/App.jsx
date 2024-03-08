@@ -1,12 +1,14 @@
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, ScrollRestoration } from "react-router-dom";
 import { BiCameraMovie } from "react-icons/bi";
+import { clearFavorites } from "./components/features/favorites/favoritesSlice";
 import NavBar from "./components/NavBar";
 
 function App() {
 
-    const favoritesFilms = useSelector(state => state.favorites.favorites);
+    const dispatch = useDispatch();
+    const favoritesFilms = useSelector((state) => state.favorites.favorites);
 
     return (
         <>
@@ -17,14 +19,24 @@ function App() {
                     <NavBar />
 
                     <div className="flex-none">
-                        <Link to="/favoris" >
+                        <Link to="/favoris">
                             <div tabIndex={0} role="button" className="btn btn-neutral btn-circle">
                                 <div className="indicator">
                                     <BiCameraMovie className="size-6" />
-                                    <span className="badge badge-sm indicator-item bg-secondary">{favoritesFilms.length}</span>
+                                    <span className="badge badge-sm absolute right-0 translate-x-1/2 -translate-y-full bg-secondary">
+                                        {favoritesFilms.length}
+                                    </span>
                                 </div>
                             </div>
                         </Link>
+                        {favoritesFilms.length > 0 && (
+                            <button 
+                                className="btn btn-circle btn-xs btn-accent absolute z-20 right-2 bottom-2"
+                                onClick={() => dispatch(clearFavorites())}
+                            >
+                                X
+                            </button>
+                        )}
                     </div>
                 </div>
             </header>
@@ -32,6 +44,7 @@ function App() {
                 <Outlet />
             </main>
             <footer></footer>
+            <ScrollRestoration />
         </>
     );
 }

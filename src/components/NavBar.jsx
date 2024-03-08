@@ -5,7 +5,7 @@ const NavBar = () => {
         <nav className="hidden lg:block">
             <ul className="flex gap-4">
                 <li>
-                    <NavLink className="" to="/" exact>
+                    <NavLink className="btn btn-sm btn-accent text-white" to="/" exact>
                         Accueil
                     </NavLink>
                 </li>

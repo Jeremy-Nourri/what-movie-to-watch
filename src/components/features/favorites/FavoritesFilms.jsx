@@ -1,9 +1,12 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useSelector } from 'react-redux'
 import FilmCard from '../films/FilmCard';
 
 const FavoritesFilms = () => {
 
     const favoritesFilms = useSelector(state => state.favorites.favorites);
+
+
 
   return (
     <article>
@@ -12,8 +15,8 @@ const FavoritesFilms = () => {
         </h1>
         <div className="flex flex-wrap gap-8 justify-center">
             { favoritesFilms.length === 0 && <p className="text-center">Vous n'avez pas encore de films favoris</p> }
-            {favoritesFilms.map(film => (
-            <FilmCard key={film.id} film={film} />
+            { favoritesFilms.map(film => (
+                <FilmCard key={film.id} film={film} />
             ))}
         </div>
 
