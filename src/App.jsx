@@ -13,7 +13,7 @@ function App() {
     return (
         <>
             <header className="container relative ">
-                <div className="fixed top-0 left-0 right-0 z-10 flex items-center justify-between w-full p-3 lg:p-6 bg-primary text-white">
+                <div className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between w-full p-3 lg:p-6 bg-black text-white">
                     <h1 className="hidden sm:block">What movie to watch !?</h1>
                     <h1 className="sm:hidden">W M T W !?</h1>
                     <NavBar />

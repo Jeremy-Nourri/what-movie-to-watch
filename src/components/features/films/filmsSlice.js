@@ -28,6 +28,18 @@ export const fetchFilmsTrending = createAsyncThunk(
     }
 )
 
+export const fetchTopFilmsByYear = createAsyncThunk(
+    'films/fetchTopFilmsByYear',
+    async (year) => {
+        try {
+            const response = await axios.request(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=fr-FR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=${year}`)
+            return response.data.results
+        } catch (error) {
+            console.log(error)
+        }
+    }
+)
+
 
 const sliceFilms = createSlice({
     name: 'films',
@@ -58,10 +70,18 @@ const sliceFilms = createSlice({
                     }
                 })
             })
+            .addCase(fetchTopFilmsByYear.fulfilled, (state, action) => {
+                state.films = action.payload.map(film => {
+                    return {
+                        ...film,
+                        release_date: new Date(film.release_date).toLocaleDateString()
+                    }
+                })
+            })
     
     }
 
-    });
+});
     
 
 export const { setLocationNavUser } = sliceFilms.actions
